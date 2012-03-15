@@ -40,7 +40,7 @@ new CharacterProvider().save([
 	{
 		name: "Apollo",
 		clan: "nosferatu",
-		covenant: ["circle", "ordo"],
+		covenants: ["circle", "ordo"],
 		attributes:{intelligence: 2, wits: 3, resolve: 4, strength: 2, dexterity: 3, stamina: 4, presence: 2, manipulation: 3, composure: 4 },
 		skills:{
 			academics: {
