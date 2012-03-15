@@ -25,7 +25,6 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-
 characterProvider = new CharacterProvider();
 
 
