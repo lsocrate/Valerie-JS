@@ -40,6 +40,19 @@ app.get('/', function(req, res){
         }});
     });
 });
+app.get('/character/new', function(req, res){
+    res.render('character_new.jade', {locals:{
+        title: "new Character"
+    }});
+});
+app.post('/character/new', function(req, res){
+    characterProvider.save({
+        name:req.param('name'),
+        clan:req.param('clan')
+    },function(error, docs){
+        res.redirect('/');
+    });
+});
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
