@@ -34,7 +34,10 @@ characterProvider = new CharacterProvider();
 // app.get('/', routes.index);
 app.get('/', function(req, res){
     characterProvider.findAll(function(error,docs){
-        res.send(docs);
+        res.render('index.jade', {locals:{
+            title: "Character",
+            characters: docs
+        }});
     });
 });
 

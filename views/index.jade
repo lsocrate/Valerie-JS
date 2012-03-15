@@ -1,2 +1,13 @@
 h1= title
-p Welcome to #{title}
+#characters
+    - each character in characters
+      div.character
+        div.name= character.name
+        div.clan= character.clan
+        div.covenants
+            - each covenant in character.covenants
+              span.covenant= covenant
+        div.assets
+            - each asset in character.assets
+              p #{asset.skill} x#{asset.level}
+        div Fim!
