@@ -28,6 +28,7 @@ CharacterProvider.prototype.save = function(characters, callback){
 		character = characters[i];
 		character._id = characterCounter++;
 		character.created_at = new Date();
+		character.covenants = character.covenants || [];
 
 
 		this.dummyData[this.dummyData.length] = character;
