@@ -1,3 +1,5 @@
+var util = require('util');
+
 Character = function(){
   this.name         = '';
   this.clan         = '';
@@ -17,7 +19,7 @@ Character = function(){
 };
 
 Character.prototype.joinCovenants = function(covenants){
-  if(typeof covenants.length === 'undefined'){
+  if(!util.isArray(covenants)){
     covenants = [covenants];
   }
 
@@ -58,6 +60,10 @@ Character.prototype.gainMerit = function(merit){
   this.merits.push({name:merit,level:level,description:description});
 
   return this;
+};
+
+Character.prototype.learnDiscipline = function(discipline, level) {
+
 };
 
 exports.Character = Character;
