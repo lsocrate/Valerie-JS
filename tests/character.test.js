@@ -97,7 +97,7 @@ module.exports = {
       .gainAsset("socialize", 2);
     assert.equal(3, character.getInfluence());
   },
-  "test get Protection/Loyalty ": function(beforeExit, assert) {
+  "test get Protection/Loyalty": function(beforeExit, assert) {
     var character = new Character();
     character
       .gainAsset("academics", 2)
@@ -108,5 +108,17 @@ module.exports = {
       .gainAsset("persuasion", 3)
       .gainAsset("socialize", 2);
     assert.equal(2, character.getAssetDefense());
+  },
+  "test get agentXP": function(beforeExit, assert) {
+    var character = new Character();
+    character
+      .gainAsset("academics", 2)
+      .gainAsset("politics", 3)
+      .gainAsset("science", 1)
+      .gainAsset("science", 3)
+      .gainAsset("intimidation", 4)
+      .gainAsset("persuasion", 3)
+      .gainAsset("socialize", 2);
+    assert.equal(10, character.getAgentXP());
   }
 };

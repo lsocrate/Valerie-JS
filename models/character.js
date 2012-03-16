@@ -155,6 +155,13 @@ Character.prototype.getInfluence = function() {
 Character.prototype.getAssetDefense = function() {
   var influence = this.getInfluence();
 
-  return (influence === 10) ? 4 : Math.ceil(influence/2) ;
+  return (influence === 10) ? 4 : Math.ceil(influence/2);
+};
+Character.prototype.getAgentXP = function() {
+  var influence = this.getInfluence();
+
+  return (influence < 3) ? 0 :
+         (influence < 9) ? (influence - 3) * 5 + 10 :
+         (influence - 9) * 10 + 40;
 };
 exports.Character = Character;
