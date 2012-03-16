@@ -34,3 +34,19 @@ CharacterProvider.prototype.findAll = function(callback){
     }
   });
 };
+
+CharacterProvider.prototype.findById = function(id, callback){
+  this.getCollection(function(error, characterCollection){
+    if(error){
+      callback(error);
+    } else {
+      characterCollection.findOne({_id: characterCollection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(error, result){
+        if(error){
+          callback(error);
+        } else {
+          callback(null, result);
+        }
+      });
+    }
+  });
+};
