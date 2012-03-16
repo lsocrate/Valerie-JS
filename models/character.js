@@ -8,3 +8,13 @@ CharacterProvider = function(host, port){
   this.db = new Db('valerie-js', new Server(host, port, {auto_reconnect:true}, {}));
   this.db.open(function(){});
 };
+
+CharacterProvider.prototype.getCollection = function(callback){
+  this.db.collection('characters', function(error, characterCollection){
+    if(error){
+      callback(error);
+    } else {
+      callback(null, characterCollection);
+    }
+  });
+};
