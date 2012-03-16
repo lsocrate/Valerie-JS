@@ -50,3 +50,27 @@ CharacterProvider.prototype.findById = function(id, callback){
     }
   });
 };
+
+CharacterProvider.prototype.save = function(characters, callback){
+  this.getCollection(function(error, characterCollection){
+    if(error){
+      callback(error);
+    } else {
+      if(typeof characters.length == "undefined"){
+        characters = [characters];
+      }
+
+      for (var i = 0; i < characters.length; i++) {
+        character = characters[i];
+        character.created_at = new Date();
+        // @TODO character saving logic
+      }
+
+      characterCollection.insert(characters, function(){
+        callback(null, characters);
+      });
+    }
+  });
+};
+
+exports.CharacterProvider = CharacterProvider;
