@@ -28,6 +28,21 @@ Character.prototype.joinCovenants = function(covenants){
   return this;
 };
 
+
+Character.prototype.leaveCovenants = function(covenants){
+  if(typeof covenants.length === 'undefined'){
+    covenants = [covenants];
+  }
+
+  for (var i = 0; i < covenants.length; i++) {
+    covenant      = covenants[i];
+    covenantIndex = this.covenants.indexOf(covenant);
+    this.covenants.splice(covenantIndex, 1);
+  }
+
+  return this;
+};
+
 Character.prototype.gainMerit = function(merit){
   var level,
       description;
