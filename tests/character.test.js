@@ -10,12 +10,6 @@ module.exports = {
       character.joinCovenants(['Ordo Dracul', 'The Invictus']);
       assert.eql(['Ordo Dracul', 'The Invictus'], character.covenants);
     },
-    'test consecutive covenant join': function(beforeExit, assert) {
-      var character = new Character();
-      character.joinCovenants('Ordo Dracul').joinCovenants('The Invictus');
-      assert.eql(['Ordo Dracul', 'The Invictus'], character.covenants);
-    },
-
     'test leave covenant': function(beforeExit, assert) {
       var character = new Character();
       character.joinCovenants('Ordo Dracul').joinCovenants('The Invictus');
@@ -33,5 +27,15 @@ module.exports = {
       character.joinCovenants('Ordo Dracul').joinCovenants('The Invictus');
       character.leaveCovenants('The Lancea Sanctum');
       assert.eql(['Ordo Dracul', 'The Invictus'], character.covenants);
+    },
+    "test gain merit order 1": function(beforeExit, assert) {
+      var character = new Character();
+      character.gainMerit('Allies', 'Fazendeiros', 4);
+      assert.eql({name:"Allies", description:"Fazendeiros", level: 4}, character.merits[0]);
+    },
+    "test gain merit order 2": function(beforeExit, assert) {
+      var character = new Character();
+      character.gainMerit('Allies', 4, 'Fazendeiros');
+      assert.eql({name:"Allies", description:"Fazendeiros", level: 4}, character.merits[0]);
     }
 };
