@@ -16,9 +16,13 @@ Character = function(){
   this.assets       = [];
 };
 
-Character.prototype.joinCovenant = function(covenant){
-  if(typeof covenant == 'string'){
-    this.covenants.push(covenant);
+Character.prototype.joinCovenants = function(covenants){
+  if(typeof covenants.length === 'undefined'){
+    covenants = [covenants];
+  }
+
+  for (var i = 0; i < covenants.length; i++) {
+    this.covenants.push(covenants[i]);
   }
 
   return this;
@@ -37,6 +41,8 @@ Character.prototype.gainMerit = function(merit){
                 null;
 
   this.merits.push({name:merit,level:level,description:description});
+
+  return this;
 };
 
 exports.Character = Character;
