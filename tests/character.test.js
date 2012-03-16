@@ -56,12 +56,6 @@ module.exports = {
   },
   "test set skill": function(beforeExit, assert) {
     var character = new Character();
-    character.setSkill('drive', 3);
-    assert.equal(character.skills.drive.level, 3);
-    assert.equal(character.skills.drive.specialties, null);
-  },
-  "test set skill": function(beforeExit, assert) {
-    var character = new Character();
     character.setSkill('drive', 3, "trucks", "bikes");
     assert.equal(character.skills.drive.level, 3);
     assert.equal(character.skills.drive.specialties.length, 2);
