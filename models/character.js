@@ -140,4 +140,14 @@ Character.prototype.gainAsset = function(skill, value) {
 
   return this;
 };
+Character.prototype.getAssetsTotal = function(first_argument) {
+  var assetsTotal = 0;
+  for (var i = 0; i < this.assets.length; i++) {
+    var asset = this.assets[i];
+    assetsTotal += asset.value;
+  }
+
+  return assetsTotal;
+};
+
 exports.Character = Character;

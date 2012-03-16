@@ -75,5 +75,14 @@ module.exports = {
     var character = new Character();
     character.gainAsset("firearms", 4, "Rambo");
     assert.eql({skill:"firearms", value:4, description:"Rambo"}, character.assets[0]);
+  },
+  "test get assets total": function(beforeExit, assert) {
+    var character = new Character();
+    character
+      .gainAsset("firearms",  1, "Rambo")
+      .gainAsset("crafts",    2, "Crafter")
+      .gainAsset("occult",    3, "Crowley")
+      .gainAsset("animalKen", 4, "Zoo");
+    assert.equal(10, character.getAssetsTotal());
   }
 };
