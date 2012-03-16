@@ -48,5 +48,22 @@ module.exports = {
     character.learnDiscipline('Crúac', 3);
     character.learnRitual('Crúac', 'Pangs of Proserpina', 2);
     assert.eql({name:"Pangs of Proserpina", level: 2}, character.disciplines["crúac"].rituals[0]);
+  },
+  "test set attribute": function(beforeExit, assert) {
+    var character = new Character();
+    character.setAttibute('strength', 3);
+    assert.equal(character.attributes.strength, 3);
+  },
+  "test set skill": function(beforeExit, assert) {
+    var character = new Character();
+    character.setSkill('drive', 3);
+    assert.equal(character.skills.drive.level, 3);
+    assert.equal(character.skills.drive.specialties, null);
+  },
+  "test set skill": function(beforeExit, assert) {
+    var character = new Character();
+    character.setSkill('drive', 3, "trucks", "bikes");
+    assert.equal(character.skills.drive.level, 3);
+    assert.equal(character.skills.drive.specialties.length, 2);
   }
 };

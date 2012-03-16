@@ -9,7 +9,17 @@ Character = function(){
   this.clan         = '';
   this.bloodline    = '';
   this.covenants    = [];
-  this.attributes   = {};
+  this.attributes   = {
+    intelligence: 1,
+    wits: 1,
+    resolve: 1,
+    strength: 1,
+    dexterity: 1,
+    stamina: 1,
+    presence: 1,
+    manipulation: 1,
+    composure: 1
+  };
   this.skills       = {};
   this.merits       = [];
   this.disciplines  = [];
@@ -76,6 +86,7 @@ Character.prototype.learnDiscipline = function(discipline, level) {
 
   return this;
 };
+
 Character.prototype.learnRitual = function(discipline, ritual, level) {
   var standardizedDisciplineName = standardizeName(discipline);
 
@@ -83,6 +94,31 @@ Character.prototype.learnRitual = function(discipline, ritual, level) {
   this.disciplines[standardizedDisciplineName].rituals.push({name:ritual, level: level});
 
   return this;
+};
+
+Character.prototype.setAttibute = function(attribute, dots) {
+  dots = parseInt(dots, 10);
+  if(typeof dots === "number" && typeof attribute === "string"){
+    this.attributes[standardizeName(attribute)] = dots;
+  }
+
+  return this;
+};
+
+Character.prototype.setSkill = function(skill) {
+  var level,
+      specialties = [];
+
+  for (var i = 1; i < arguments.length; i++) {
+    var argument = arguments[i];
+    if(typeof argument === "number") {
+      level = argument;
+    } else if(typeof argument === "string") {
+      specialties.push(argument);
+    }
+  }
+
+  this.skills[skill] = {level:level, specialties:(specialties.length > 0) ? specialties : null};
 };
 
 exports.Character = Character;
