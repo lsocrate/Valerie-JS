@@ -32,14 +32,16 @@ Character.prototype.joinCovenants = function(covenants){
 
 
 Character.prototype.leaveCovenants = function(covenants){
-  if(typeof covenants.length === 'undefined'){
+  if(!util.isArray(covenants)){
     covenants = [covenants];
   }
 
   for (var i = 0; i < covenants.length; i++) {
     covenant      = covenants[i];
     covenantIndex = this.covenants.indexOf(covenant);
-    this.covenants.splice(covenantIndex, 1);
+    if(covenantIndex > -1){
+      this.covenants.splice(covenantIndex, 1);
+    }
   }
 
   return this;
