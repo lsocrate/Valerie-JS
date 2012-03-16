@@ -43,8 +43,6 @@ Character.prototype.joinCovenants = function(covenants){
 
   return this;
 };
-
-
 Character.prototype.leaveCovenants = function(covenants){
   if(!util.isArray(covenants)){
     covenants = [covenants];
@@ -60,7 +58,6 @@ Character.prototype.leaveCovenants = function(covenants){
 
   return this;
 };
-
 Character.prototype.gainMerit = function(merit){
   var level,
       description;
@@ -77,8 +74,6 @@ Character.prototype.gainMerit = function(merit){
 
   return this;
 };
-
-
 Character.prototype.learnDiscipline = function(discipline, level) {
   var standardizedDisciplineName = standardizeName(discipline);
 
@@ -86,7 +81,6 @@ Character.prototype.learnDiscipline = function(discipline, level) {
 
   return this;
 };
-
 Character.prototype.learnRitual = function(discipline, ritual, level) {
   var standardizedDisciplineName = standardizeName(discipline);
 
@@ -95,7 +89,6 @@ Character.prototype.learnRitual = function(discipline, ritual, level) {
 
   return this;
 };
-
 Character.prototype.setAttibute = function(attribute, dots) {
   dots = parseInt(dots, 10);
   if(typeof dots === "number" && typeof attribute === "string"){
@@ -104,7 +97,6 @@ Character.prototype.setAttibute = function(attribute, dots) {
 
   return this;
 };
-
 Character.prototype.setSkill = function(skill) {
   var level,
       specialties = [];
@@ -119,6 +111,21 @@ Character.prototype.setSkill = function(skill) {
   }
 
   this.skills[skill] = {level:level, specialties:(specialties.length > 0) ? specialties : null};
+
+  return this;
+};
+Character.prototype.gainDerangement = function(derangement) {
+  var atHumanity = null;
+
+  derangement = standardizeName(derangement);
+
+  if(typeof arguments[1] === "number"){
+    atHumanity = arguments[1];
+  }
+
+  this.derangements.push({name:derangement, atHumanity:atHumanity});
+
+  return this;
 };
 
 exports.Character = Character;

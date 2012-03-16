@@ -65,5 +65,10 @@ module.exports = {
     character.setSkill('drive', 3, "trucks", "bikes");
     assert.equal(character.skills.drive.level, 3);
     assert.equal(character.skills.drive.specialties.length, 2);
+  },
+  "test gain derangement": function(beforeExit, assert) {
+    var character = new Character();
+    character.gainDerangement("narcisism", 4);
+    assert.eql({name:"narcisism",atHumanity:4}, character.derangements[0]);
   }
 };
