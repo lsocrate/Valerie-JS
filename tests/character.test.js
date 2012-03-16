@@ -84,5 +84,29 @@ module.exports = {
       .gainAsset("occult",    3, "Crowley")
       .gainAsset("animalKen", 4, "Zoo");
     assert.equal(10, character.getAssetsTotal());
+  },
+  "test get Influence": function(beforeExit, assert) {
+    var character = new Character();
+    character
+      .gainAsset("academics", 2)
+      .gainAsset("politics", 3)
+      .gainAsset("science", 1)
+      .gainAsset("science", 3)
+      .gainAsset("intimidation", 4)
+      .gainAsset("persuasion", 3)
+      .gainAsset("socialize", 2);
+    assert.equal(3, character.getInfluence());
+  },
+  "test get Protection/Loyalty ": function(beforeExit, assert) {
+    var character = new Character();
+    character
+      .gainAsset("academics", 2)
+      .gainAsset("politics", 3)
+      .gainAsset("science", 1)
+      .gainAsset("science", 3)
+      .gainAsset("intimidation", 4)
+      .gainAsset("persuasion", 3)
+      .gainAsset("socialize", 2);
+    assert.equal(2, character.getAssetDefense());
   }
 };

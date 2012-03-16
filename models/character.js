@@ -149,5 +149,12 @@ Character.prototype.getAssetsTotal = function(first_argument) {
 
   return assetsTotal;
 };
+Character.prototype.getInfluence = function() {
+  return Math.floor(Math.ceil(Math.ceil(this.getAssetsTotal() - 5, 0) / 5), 10);
+};
+Character.prototype.getAssetDefense = function() {
+  var influence = this.getInfluence();
 
+  return (influence === 10) ? 4 : Math.ceil(influence/2) ;
+};
 exports.Character = Character;
