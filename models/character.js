@@ -1,5 +1,9 @@
 var util = require('util');
 
+var standardizeName = function (name){
+  return name.toLowerCase().trim();
+};
+
 Character = function(){
   this.name         = '';
   this.clan         = '';
@@ -64,8 +68,21 @@ Character.prototype.gainMerit = function(merit){
   return this;
 };
 
-Character.prototype.learnDiscipline = function(discipline, level) {
 
+Character.prototype.learnDiscipline = function(discipline, level) {
+  var standardizedDisciplineName = standardizeName(discipline);
+
+  this.disciplines[standardizedDisciplineName] = {name:discipline, level: level};
+
+  return this;
+};
+Character.prototype.learnRitual = function(discipline, ritual, level) {
+  var standardizedDisciplineName = standardizeName(discipline);
+
+  this.disciplines[standardizedDisciplineName].rituals = [];
+  this.disciplines[standardizedDisciplineName].rituals.push({name:ritual, level: level});
+
+  return this;
 };
 
 exports.Character = Character;
