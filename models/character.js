@@ -127,5 +127,17 @@ Character.prototype.gainDerangement = function(derangement) {
 
   return this;
 };
+Character.prototype.gainAsset = function(skill, value) {
+  var description = null;
 
+  if(typeof arguments[2] === "string"){
+    description = arguments[2];
+  }
+
+  value = parseInt(value, 10);
+
+  this.assets.push({skill:skill,value:value,description:description});
+
+  return this;
+};
 exports.Character = Character;

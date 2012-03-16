@@ -70,5 +70,10 @@ module.exports = {
     var character = new Character();
     character.gainDerangement("narcisism", 4);
     assert.eql({name:"narcisism",atHumanity:4}, character.derangements[0]);
+  },
+  "test gain asset": function(beforeExit, assert) {
+    var character = new Character();
+    character.gainAsset("firearms", 4, "Rambo");
+    assert.eql({skill:"firearms", value:4, description:"Rambo"}, character.assets[0]);
   }
 };
