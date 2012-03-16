@@ -18,3 +18,19 @@ CharacterProvider.prototype.getCollection = function(callback){
     }
   });
 };
+
+CharacterProvider.prototype.findAll = function(callback){
+  this.getCollection(function(error, characterCollection){
+    if(error){
+      callback(error);
+    } else {
+      characterCollection.find().toArray(function(error, results){
+        if(error){
+          callback(error);
+        } else {
+          callback(null, results);
+        }
+      });
+    }
+  });
+};
