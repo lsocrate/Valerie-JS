@@ -14,6 +14,8 @@ Character = function(){
   this.name         = '';
   this.clan         = '';
   this.bloodline    = '';
+  this.virtue       = '';
+  this.vice         = '';
   this.covenants    = [];
   this.attributes   = {
     intelligence: 1,
@@ -50,6 +52,16 @@ Character = function(){
 
 Character.prototype.setName = function(name) {
   this.name = name.toString();
+
+  return this;
+};
+Character.prototype.setVirtue = function(virtue) {
+  this.virtue = virtue.toString().toStandard();
+
+  return this;
+};
+Character.prototype.setVice = function(vice) {
+  this.vice = vice.toString().toStandard();
 
   return this;
 };
@@ -103,6 +115,7 @@ Character.prototype.gainMerit = function(merit){
 
   if(merit.toStandard() === "large"){
     this.size = 6;
+    this.updateHealth();
   }
 
   this.merits.push({name:merit,level:level,description:description});
@@ -200,12 +213,13 @@ Character.prototype.getAgentXP = function() {
          (influence - 9) * 10 + 40;
 };
 Character.prototype.setHumanity = function(humanity) {
-  this.humanity = parseInt(humanity, 10).trim(1, 10);
+  this.humanity = parseInt(humanity, 10).trim(0, 10);
 
   return this;
 };
 Character.prototype.adjustHumanity = function(adjust) {
   this.humanity += parseInt(adjust, 10);
+  this.humanity = this.humanity.trim(0, 10);
 
   return this;
 };
@@ -260,7 +274,7 @@ Character.prototype.updateWounds = function() {
 
   return this;
 };
-Character.prototype.setHealth = function() {
+Character.prototype.updateHealth = function() {
   this.health.max = this.attributes.stamina + this.size;
 
   this.updateWounds();
@@ -282,5 +296,4 @@ Character.prototype.wound = function(damage) {
 
   return this;
 };
-
-exports.Character = Character;
+exports.Character = Character; 

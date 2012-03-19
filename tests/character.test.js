@@ -120,6 +120,16 @@ module.exports = {
     character.setName('Athena');
     assert.equal('Athena', character.name);
   },
+  "test set virtue": function(beforeExit, assert) {
+    var character = new Character();
+    character.setVirtue('Justice');
+    assert.equal('justice', character.virtue);
+  },
+  "test set vice": function(beforeExit, assert) {
+    var character = new Character();
+    character.setVice('Wrath');
+    assert.equal('wrath', character.vice);
+  },
   "test set clan": function(beforeExit, assert) {
     var character = new Character();
     character.setClan('Nosferatu');
@@ -129,7 +139,7 @@ module.exports = {
     var character = new Character();
     character.joinBloodline('Burakumin');
     assert.equal('Burakumin', character.bloodline);
-  },
+  }, 
   "test set humanity": function(beforeExit, assert) {
     var character = new Character();
     character.setHumanity(3);
@@ -172,12 +182,12 @@ module.exports = {
   },
   "test set health ": function(beforeExit, assert) {
     var character = new Character();
-    character.setAttribute('stamina', 2).setHealth();
+    character.setAttribute('stamina', 2).updateHealth();
     assert.equal(7, character.health.max);
   },
   "test wounding ": function(beforeExit, assert) {
     var character = new Character();
-    character.setAttribute('stamina', 2).setHealth();
+    character.setAttribute('stamina', 2).updateHealth();
     character.wound('2A');
     assert.eql({max:7, aggr:2, bash:0, lethal: 0}, character.health);
     character.wound('2L');
