@@ -172,8 +172,8 @@ module.exports = {
   },
   "test set health ": function(beforeExit, assert) {
     var character = new Character();
-    character.setAttribute('stamina', 2).setHealth(true);
-    assert.equal(8, character.health.max);
+    character.setAttribute('stamina', 2).setHealth();
+    assert.equal(7, character.health.max);
   },
   "test wounding ": function(beforeExit, assert) {
     var character = new Character();

@@ -37,8 +37,9 @@ Character = function(){
   };
   this.vitae        = Math.ceil(Math.random() * 10);
   this.bloodPotence = 1;
+  this.size         = 5;
   this.health       = {
-    max: 6,
+    max: this.attributes.stamina + this.size,
     bash: 0,
     lethal: 0,
     aggr: 0
@@ -99,6 +100,10 @@ Character.prototype.gainMerit = function(merit){
   description = (typeof arguments[1] === 'string') ? arguments[1] :
                 (typeof arguments[2] === 'string') ? arguments[2] :
                 null;
+
+  if(merit.toStandard() === "large"){
+    this.size = 6;
+  }
 
   this.merits.push({name:merit,level:level,description:description});
 
@@ -255,9 +260,8 @@ Character.prototype.updateWounds = function() {
 
   return this;
 };
-Character.prototype.setHealth = function(isLarge) {
-  var size = (isLarge) ? 6 : 5;
-  this.health.max = this.attributes.stamina + size;
+Character.prototype.setHealth = function() {
+  this.health.max = this.attributes.stamina + this.size;
 
   this.updateWounds();
 
