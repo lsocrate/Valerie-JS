@@ -51,7 +51,7 @@ module.exports = {
   },
   "test set attribute": function(beforeExit, assert) {
     var character = new Character();
-    character.setAttibute('strength', 3);
+    character.setAttribute('strength', 3);
     assert.equal(character.attributes.strength, 3);
   },
   "test set skill": function(beforeExit, assert) {
@@ -169,5 +169,22 @@ module.exports = {
     var character = new Character();
     character.setWillpower(5).spendWillpower().spendWillpower();
     assert.equal(3, character.willpower.points);
+  },
+  "test set health ": function(beforeExit, assert) {
+    var character = new Character();
+    character.setAttribute('stamina', 2).setHealth(true);
+    assert.equal(8, character.health.max);
+  },
+  "test wounding ": function(beforeExit, assert) {
+    var character = new Character();
+    character.setAttribute('stamina', 2).setHealth();
+    character.wound('2A');
+    assert.eql({max:7, aggr:2, bash:0, lethal: 0}, character.health);
+    character.wound('2L');
+    assert.eql({max:7, aggr:2, bash:0, lethal: 2}, character.health);
+    character.wound('2B');
+    assert.eql({max:7, aggr:2, bash:2, lethal: 2}, character.health);
+    character.wound('6A');
+    assert.eql({max:7, aggr:7, bash:0, lethal: 0}, character.health);
   }
 };

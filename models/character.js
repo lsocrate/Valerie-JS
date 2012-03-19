@@ -119,7 +119,7 @@ Character.prototype.learnRitual = function(discipline, ritual, level) {
 
   return this;
 };
-Character.prototype.setAttibute = function(attribute, dots) {
+Character.prototype.setAttribute = function(attribute, dots) {
   dots = parseInt(dots, 10).trim(1, this.maxDots);
   if(typeof dots === "number" && typeof attribute === "string"){
     this.attributes[attribute.toStandard()] = dots;
@@ -170,7 +170,7 @@ Character.prototype.gainAsset = function(skill, value) {
 
   return this;
 };
-Character.prototype.getAssetsTotal = function(first_argument) {
+Character.prototype.getAssetsTotal = function() {
   var assetsTotal = 0;
   for (var i = 0; i < this.assets.length; i++) {
     var asset = this.assets[i];
@@ -245,6 +245,36 @@ Character.prototype.setWillpower = function(willpower) {
 };
 Character.prototype.spendWillpower = function() {
   this.willpower.points = (this.willpower.points - 1).trim(0, this.willpower.dots);
+
+  return this;
+};
+Character.prototype.updateWounds = function() {
+  this.health.aggr   = this.health.aggr.trim(0, this.health.max);
+  this.health.lethal = this.health.lethal.trim(0, this.health.max - this.health.aggr);
+  this.health.bash   = this.health.bash.trim(0, this.health.max - this.health.aggr - this.health.lethal);
+
+  return this;
+};
+Character.prototype.setHealth = function(isLarge) {
+  var size = (isLarge) ? 6 : 5;
+  this.health.max = this.attributes.stamina + size;
+
+  this.updateWounds();
+
+  return this;
+};
+Character.prototype.wound = function(damage) {
+  var wound = damage.match(/^(\d*)(\w)/),
+      quantity = parseInt(wound[1], 10),
+      typeSign = wound[2],
+      type = (typeSign.toStandard() === "b") ? 'bash':
+             (typeSign.toStandard() === "l") ? 'lethal':
+             (typeSign.toStandard() === "a") ? 'aggr' : null ;
+
+  if(typeof quantity === "number" && typeof type === "string") {
+    this.health[type] += quantity;
+    this.updateWounds();
+  }
 
   return this;
 };
