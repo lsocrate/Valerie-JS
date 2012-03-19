@@ -1,7 +1,13 @@
 var util = require('util');
 
-var standardizeName = function (name){
-  return name.toLowerCase().trim();
+Number.prototype.trim = function(a, b) {
+  var min = Math.min(a, b),
+      max = Math.max(a, b);
+
+  return Math.min(Math.max(parseInt(this, 10), min), max);
+};
+String.prototype.toStandard = function() {
+  return this.toLowerCase().trim();
 };
 
 Character = function(){
@@ -26,10 +32,11 @@ Character = function(){
   this.humanity     = 7;
   this.derangements = [];
   this.willpower    = {};
-  this.vitae        = 8;
+  this.vitae        = Math.ceil(Math.random() * 10);
   this.bloodPotence = 1;
   this.health       = {};
   this.assets       = [];
+  this.maxDots      = 5;
 };
 
 Character.prototype.setName = function(name) {
@@ -90,14 +97,14 @@ Character.prototype.gainMerit = function(merit){
   return this;
 };
 Character.prototype.learnDiscipline = function(discipline, level) {
-  var standardizedDisciplineName = standardizeName(discipline);
+  var standardizedDisciplineName = discipline.toStandard();
 
   this.disciplines[standardizedDisciplineName] = {name:discipline, level: level};
 
   return this;
 };
 Character.prototype.learnRitual = function(discipline, ritual, level) {
-  var standardizedDisciplineName = standardizeName(discipline);
+  var standardizedDisciplineName = discipline.toStandard();
 
   this.disciplines[standardizedDisciplineName].rituals = [];
   this.disciplines[standardizedDisciplineName].rituals.push({name:ritual, level: level});
@@ -105,9 +112,9 @@ Character.prototype.learnRitual = function(discipline, ritual, level) {
   return this;
 };
 Character.prototype.setAttibute = function(attribute, dots) {
-  dots = parseInt(dots, 10);
+  dots = parseInt(dots, 10).trim(1, this.maxDots);
   if(typeof dots === "number" && typeof attribute === "string"){
-    this.attributes[standardizeName(attribute)] = dots;
+    this.attributes[attribute.toStandard()] = dots;
   }
 
   return this;
@@ -119,7 +126,7 @@ Character.prototype.setSkill = function(skill) {
   for (var i = 1; i < arguments.length; i++) {
     var argument = arguments[i];
     if(typeof argument === "number") {
-      level = argument;
+      level = argument.trim(1, this.maxDots);
     } else if(typeof argument === "string") {
       specialties.push(argument);
     }
@@ -132,7 +139,7 @@ Character.prototype.setSkill = function(skill) {
 Character.prototype.gainDerangement = function(derangement) {
   var atHumanity = null;
 
-  derangement = standardizeName(derangement);
+  derangement = derangement.toStandard();
 
   if(typeof arguments[1] === "number"){
     atHumanity = arguments[1];
@@ -149,7 +156,7 @@ Character.prototype.gainAsset = function(skill, value) {
     description = arguments[2];
   }
 
-  value = parseInt(value, 10);
+  value = parseInt(value, 10).trim(1, 5);
 
   this.assets.push({skill:skill,value:value,description:description});
 
@@ -180,7 +187,12 @@ Character.prototype.getAgentXP = function() {
          (influence - 9) * 10 + 40;
 };
 Character.prototype.setHumanity = function(humanity) {
-  this.humanity = parseInt(humanity, 10);
+  this.humanity = parseInt(humanity, 10).trim(1, 10);
+
+  return this;
+};
+Character.prototype.adjustHumanity = function(adjust) {
+  this.humanity += parseInt(adjust, 10);
 
   return this;
 };
@@ -189,4 +201,30 @@ Character.prototype.setVitae = function(vitae) {
 
   return this;
 };
+Character.prototype.adjustVitae = function(vitae) {
+  this.vitae += parseInt(vitae, 10);
+
+  return this;
+};
+Character.prototype.updateMaxDots = function() {
+  this.maxDots = (this.bloodPotence < 6) ? 5 : this.bloodPotence - 5 ;
+
+  return this;
+};
+Character.prototype.setBloodPotence = function(bloodPotence) {
+  this.bloodPotence = parseInt(bloodPotence, 10).trim(1,10);
+
+  this.updateMaxDots();
+
+  return this;
+};
+Character.prototype.adjustBloodPotence = function(bloodPotence) {
+  this.bloodPotence += parseInt(bloodPotence, 10);
+  this.bloodPotence = this.bloodPotence.trim(1,10);
+
+  this.updateMaxDots();
+
+  return this;
+};
+
 exports.Character = Character;

@@ -135,9 +135,29 @@ module.exports = {
     character.setHumanity(3);
     assert.equal(3, character.humanity);
   },
+  "test adjust humanity": function(beforeExit, assert) {
+    var character = new Character();
+    character.setHumanity(3).adjustHumanity(-1);
+    assert.equal(2, character.humanity);
+  },
   "test set vitae": function(beforeExit, assert) {
     var character = new Character();
     character.setVitae(15);
     assert.equal(15, character.vitae);
+  },
+  "test adjust vitae": function(beforeExit, assert) {
+    var character = new Character();
+    character.setVitae(15).adjustVitae(5);
+    assert.equal(20, character.vitae);
+  },
+  "test set Blood Potence": function(beforeExit, assert) {
+    var character = new Character();
+    character.setBloodPotence(3);
+    assert.equal(3, character.bloodPotence);
+  },
+  "test adjust Blood Potence": function(beforeExit, assert) {
+    var character = new Character();
+    character.setBloodPotence(3).adjustBloodPotence(1);
+    assert.equal(4, character.bloodPotence);
   }
 };
