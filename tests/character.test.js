@@ -159,5 +159,15 @@ module.exports = {
     var character = new Character();
     character.setBloodPotence(3).adjustBloodPotence(1);
     assert.equal(4, character.bloodPotence);
+  },
+  "test set Willpower": function(beforeExit, assert) {
+    var character = new Character();
+    character.setWillpower(5);
+    assert.equal(5, character.willpower.dots);
+  },
+  "test spend Willpower": function(beforeExit, assert) {
+    var character = new Character();
+    character.setWillpower(5).spendWillpower().spendWillpower();
+    assert.equal(3, character.willpower.points);
   }
 };

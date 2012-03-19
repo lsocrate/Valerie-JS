@@ -31,10 +31,18 @@ Character = function(){
   this.disciplines  = [];
   this.humanity     = 7;
   this.derangements = [];
-  this.willpower    = {};
+  this.willpower    = {
+    dots:2,
+    points:2
+  };
   this.vitae        = Math.ceil(Math.random() * 10);
   this.bloodPotence = 1;
-  this.health       = {};
+  this.health       = {
+    max: 6,
+    bash: 0,
+    lethal: 0,
+    aggr: 0
+  };
   this.assets       = [];
   this.maxDots      = 5;
 };
@@ -223,6 +231,20 @@ Character.prototype.adjustBloodPotence = function(bloodPotence) {
   this.bloodPotence = this.bloodPotence.trim(1,10);
 
   this.updateMaxDots();
+
+  return this;
+};
+Character.prototype.setWillpower = function(willpower) {
+  var newWillpower = parseInt(willpower, 10).trim(1, this.maxDots * 2);
+
+  this.willpower.points = (this.willpower.points === this.willpower.dots) ? newWillpower :
+                          this.willpower.points.trim(0, newWillpower);
+  this.willpower.dots = newWillpower;
+
+  return this;
+};
+Character.prototype.spendWillpower = function() {
+  this.willpower.points = (this.willpower.points - 1).trim(0, this.willpower.dots);
 
   return this;
 };
