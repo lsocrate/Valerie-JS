@@ -48,6 +48,27 @@ Character = function(){
   };
   this.assets       = [];
   this.maxDots      = 5;
+
+  var name,
+      clan,
+      virtue,
+      vice;
+
+  if(typeof arguments[0] === "string") {
+    name = arguments[0];
+  }
+  if(typeof arguments[1] === "string") {
+    clan = arguments[1];
+  }
+  if(typeof arguments[2] === "string") {
+    virtue = arguments[2];
+  }
+  if(typeof arguments[3] === "string") {
+    vice = arguments[3];
+  }
+  if(name && clan && virtue && vice){
+    this.setName(name).setClan(clan).setVirtue(virtue).setVice(vice);
+  }
 };
 
 Character.prototype.setName = function(name) {
@@ -296,4 +317,5 @@ Character.prototype.wound = function(damage) {
 
   return this;
 };
-exports.Character = Character; 
+
+exports.Character = Character;

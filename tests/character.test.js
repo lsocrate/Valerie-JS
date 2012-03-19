@@ -139,7 +139,7 @@ module.exports = {
     var character = new Character();
     character.joinBloodline('Burakumin');
     assert.equal('Burakumin', character.bloodline);
-  }, 
+  },
   "test set humanity": function(beforeExit, assert) {
     var character = new Character();
     character.setHumanity(3);
@@ -196,5 +196,13 @@ module.exports = {
     assert.eql({max:7, aggr:2, bash:2, lethal: 2}, character.health);
     character.wound('6A');
     assert.eql({max:7, aggr:7, bash:0, lethal: 0}, character.health);
+  },
+  "test create Character ": function(beforeExit, assert) {
+    var character = new Character("Athenas", "Nosferatu", "Justice", "Pride");
+
+    assert.equal("Athenas", character.name);
+    assert.equal("nosferatu", character.clan);
+    assert.equal("justice", character.virtue);
+    assert.equal("pride", character.vice);
   }
 };
