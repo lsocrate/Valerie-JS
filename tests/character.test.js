@@ -114,5 +114,30 @@ module.exports = {
       .gainAsset("persuasion", 3)
       .gainAsset("socialize", 2);
     assert.equal(10, character.getAgentXP());
+  },
+  "test set name": function(beforeExit, assert) {
+    var character = new Character();
+    character.setName('Athena');
+    assert.equal('Athena', character.name);
+  },
+  "test set clan": function(beforeExit, assert) {
+    var character = new Character();
+    character.setClan('Nosferatu');
+    assert.equal('nosferatu', character.clan);
+  },
+  "test join bloodline": function(beforeExit, assert) {
+    var character = new Character();
+    character.joinBloodline('Burakumin');
+    assert.equal('Burakumin', character.bloodline);
+  },
+  "test set humanity": function(beforeExit, assert) {
+    var character = new Character();
+    character.setHumanity(3);
+    assert.equal(3, character.humanity);
+  },
+  "test set vitae": function(beforeExit, assert) {
+    var character = new Character();
+    character.setVitae(15);
+    assert.equal(15, character.vitae);
   }
 };

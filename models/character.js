@@ -32,6 +32,21 @@ Character = function(){
   this.assets       = [];
 };
 
+Character.prototype.setName = function(name) {
+  this.name = name.toString();
+
+  return this;
+};
+Character.prototype.setClan = function(clan) {
+  this.clan = clan.toString().toLowerCase();
+
+  return this;
+};
+Character.prototype.joinBloodline = function(bloodline) {
+  this.bloodline = bloodline.toString();
+
+  return this;
+};
 Character.prototype.joinCovenants = function(covenants){
   if(!util.isArray(covenants)){
     covenants = [covenants];
@@ -163,5 +178,15 @@ Character.prototype.getAgentXP = function() {
   return (influence < 3) ? 0 :
          (influence < 9) ? (influence - 3) * 5 + 10 :
          (influence - 9) * 10 + 40;
+};
+Character.prototype.setHumanity = function(humanity) {
+  this.humanity = parseInt(humanity, 10);
+
+  return this;
+};
+Character.prototype.setVitae = function(vitae) {
+  this.vitae = parseInt(vitae, 10);
+
+  return this;
 };
 exports.Character = Character;
