@@ -8,7 +8,7 @@ form(method = "post")
             label Clan:
                 select(name="clan")
                     - each clan in clans
-                      option(value="#{clan}") #{clan}
+                      option(value="#{clan}")= clan
         div
             label Bloodline:
                 input(type="text", name="bloodline")
@@ -16,11 +16,27 @@ form(method = "post")
             label Virtue:
                 select(name="virtue")
                     - each virtue in virtues
-                      option(value="#{virtue}") #{virtue}
+                      option(value="#{virtue}")= virtue
         div
             label Vice:
                 select(name="vice")
                     - each vice in vices
-                      option(value="#{vice}") #{vice}
+                      option(value="#{vice}")= vice
+        div.attributes
+            div.attributes-mental
+                - attributes = ["intelligence", "wits", "resolve"]
+                - each attribute in attributes
+                  label #{attribute}:
+                      input(type="number", min="1", max="5", step="1", value="1", name="attributes.#{attribute}")
+            div.attributes-physical
+                - attributes = ["strength", "dexterity", "stamina"]
+                - each attribute in attributes
+                  label #{attribute}:
+                      input(type="number", min="1", max="5", step="1", value="1", name="attributes.#{attribute}")
+            div.attributes-social
+                - attributes = ["presence", "manipulation", "composure"]
+                - each attribute in attributes
+                  label #{attribute}:
+                      input(type="number", min="1", max="5", step="1", value="1", name="attributes.#{attribute}")
         div#editCharacterSubmit
             input(type="submit", value="Send")
