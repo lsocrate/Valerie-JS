@@ -51,5 +51,5 @@ Pool.prototype.roll = function() {
   return {successes:successes, passed:(successes > 0)};
 };
 
-exports.Die = Die;
+exports.Die  = Die;
 exports.Pool = Pool;
