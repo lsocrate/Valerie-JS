@@ -1,6 +1,7 @@
 var express = require('express'),
     routes = require('./routes'),
     CharacterProvider = require('./character-provider-memory').CharacterProvider,
+    clans = require('./models/clan').clans,
     vices = require('./models/vice').vices,
     virtues = require('./models/virtue').virtues;
 
@@ -44,6 +45,7 @@ app.get('/', function(req, res){
 app.get('/character/new', function(req, res){
   res.render('character_new.jade', {locals:{
     title: "new Character",
+    clans: clans,
     vices: vices,
     virtues: virtues
   }});

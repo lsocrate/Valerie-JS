@@ -6,7 +6,9 @@ form(method = "post")
                 input(type="text", name="name")
         div
             label Clan:
-                input(type="text", name="clan")
+                select(name="clan")
+                    - each clan in clans
+                      option(value="#{clan}") #{clan}
         div
             label Bloodline:
                 input(type="text", name="bloodline")
