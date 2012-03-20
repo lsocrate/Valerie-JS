@@ -1,6 +1,8 @@
 var express = require('express'),
-  routes = require('./routes'),
-  CharacterProvider = require('./character-provider-memory').CharacterProvider;
+    routes = require('./routes'),
+    CharacterProvider = require('./character-provider-memory').CharacterProvider,
+    vices = require('./models/vice').vices,
+    virtues = require('./models/virtue').virtues;
 
 var app = module.exports = express.createServer();
 
@@ -36,12 +38,14 @@ app.get('/', function(req, res){
     res.render('index.jade', {locals:{
       title: "Character",
       characters: docs
-    }});a
+    }});
   });
 });
 app.get('/character/new', function(req, res){
   res.render('character_new.jade', {locals:{
-    title: "new Character"
+    title: "new Character",
+    vices: vices,
+    virtues: virtues
   }});
 });
 app.post('/character/new', function(req, res){
