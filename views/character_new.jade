@@ -1,5 +1,5 @@
 h1= title
-form(method = "post")
+form.character-new(method = "post")
   div
     label Name:
       input(type="text", name="character[name]")
@@ -10,7 +10,7 @@ form(method = "post")
           option(value="#{clan}")= clan
   div
     label Bloodline:
-              input(type="text", name="character[bloodline]")
+      input(type="text", name="character[bloodline]")
   div
     label Virtue:
       select(name="character[virtue]")
