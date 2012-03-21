@@ -1,64 +1,80 @@
 h1= title
 form(method = "post")
-    div
-        div
-            label Name:
-                input(type="text", name="character[name]")
-        div
-            label Clan:
-                select(name="clan")
-                    - each clan in clans
-                      option(value="#{clan}")= clan
-        div
-            label Bloodline:
-                input(type="text", name="character[bloodline]")
-        div
-            label Virtue:
-                select(name="character[virtue]")
-                    - each virtue in virtues
-                      option(value="#{virtue}")= virtue
-        div
-            label Vice:
-                select(name="character[vice]")
-                    - each vice in vices
-                      option(value="#{vice}")= vice
-        div.attributes
-            div.attributes-mental
-                - attributes = ["intelligence", "wits", "resolve"]
-                - each attribute in attributes
-                  label #{attribute}:
-                      input(type="number", min="1", max="5", step="1", value="1", name="character[attributes][#{attribute}]")
-            div.attributes-physical
-                - attributes = ["strength", "dexterity", "stamina"]
-                - each attribute in attributes
-                  label #{attribute}:
-                      input(type="number", min="1", max="5", step="1", value="1", name="character[attributes][#{attribute}]")
-            div.attributes-social
-                - attributes = ["presence", "manipulation", "composure"]
-                - each attribute in attributes
-                  label #{attribute}:
-                      input(type="number", min="1", max="5", step="1", value="1", name="character[attributes][#{attribute}]")
-        div.skills
-            div.skills-mental
-                - skills = ["academics", "computer", "crafts", "investigation", "medicine", "occult", "politics", "science"]
-                - each skill in skills
-                  label #{skill}:
-                      input(type="number", min="0", max="5", step="1", value="0", name="character[skills][#{skill}]")
-            div.skills-physical
-                - skills = ["athletics", "brawl", "drive", "firearms", "larceny", "stealth", "survival", "weaponry"]
-                - each skill in skills
-                  label #{skill}:
-                      input(type="number", min="0", max="5", step="1", value="0", name="character[skills][#{skill}]")
-            div.skills-mental
-                - skills = ["animalKen", "empathy", "expression", "intimidation", "persuasion", "socialize", "streetwise", "subterfuge"]
-                - each skill in skills
-                  label #{skill}:
-                      input(type="number", min="0", max="5", step="1", value="0", name="character[skills][#{skill}]")
-        div.merits
-            div.merit(data-action="merit-filler")
-                label Merit:
-                input(type="text", name="character[merit][n1][name]")
-                input(type="text", name="character[merit][n1][description]")
-                input(type="number", min="0", max="5", step="1", name="character[merit][n1][value]")
-        div#editCharacterSubmit
-            input(type="submit", value="Send")
+  div
+    label Name:
+      input(type="text", name="character[name]")
+  div
+    label Clan:
+      select(name="clan")
+        - each clan in clans
+          option(value="#{clan}")= clan
+  div
+    label Bloodline:
+              input(type="text", name="character[bloodline]")
+  div
+    label Virtue:
+      select(name="character[virtue]")
+        - each virtue in virtues
+          option(value="#{virtue}")= virtue
+  div
+    label Vice:
+      select(name="character[vice]")
+        - each vice in vices
+          option(value="#{vice}")= vice
+  div.attributes
+    div.attributes-mental
+      - attributes = ["intelligence", "wits", "resolve"]
+      - each attribute in attributes
+        label #{attribute}:
+          input(type="number", min="1", max="5", step="1", value="1", name="character[attributes][#{attribute}]")
+    div.attributes-physical
+      - attributes = ["strength", "dexterity", "stamina"]
+        - each attribute in attributes
+          label #{attribute}:
+            input(type="number", min="1", max="5", step="1", value="1", name="character[attributes][#{attribute}]")
+    div.attributes-social
+      - attributes = ["presence", "manipulation", "composure"]
+        - each attribute in attributes
+          label #{attribute}:
+            input(type="number", min="1", max="5", step="1", value="1", name="character[attributes][#{attribute}]")
+  div.skills
+    div.skills-mental
+      - skills = ["academics", "computer", "crafts", "investigation", "medicine", "occult", "politics", "science"]
+      - each skill in skills
+        label #{skill}:
+          input(type="number", min="0", max="5", step="1", value="0", name="character[skills][#{skill}]")
+    div.skills-physical
+      - skills = ["athletics", "brawl", "drive", "firearms", "larceny", "stealth", "survival", "weaponry"]
+      - each skill in skills
+        label #{skill}:
+          input(type="number", min="0", max="5", step="1", value="0", name="character[skills][#{skill}]")
+    div.skills-mental
+      - skills = ["animalKen", "empathy", "expression", "intimidation", "persuasion", "socialize", "streetwise", "subterfuge"]
+      - each skill in skills
+        label #{skill}:
+          input(type="number", min="0", max="5", step="1", value="0", name="character[skills][#{skill}]")
+  div.merits
+    div.merit(data-action="merit-filler")
+      label Merit:
+      input(type="text", data-action="merit-name", name="character[merits]")
+      input(type="text", data-action="merit-description", name="character[merits]")
+      input(type="number", data-action="merit-value", min="0", max="5", step="1", name="character[merits]")
+  div.disciplines
+    div.discipline(data-action="discipline-filler")
+      label Discipline:
+      input(type="text", data-action="discipline-name", name="character[disciplines]")
+      input(type="number", data-action="discipline-value", min="0", max="5", step="1", name="character[disciplines]")
+  div.other
+    label Humanity:
+      input(type="number", min="0", max="10", step="1", name="character[humanity]")
+    label Willpower:
+      input(type="number", min="2", max="10", step="1", name="character[willpower]")
+    label Blood Potence:
+      input(type="number", min="1", max="10", step="1", name="character[bloodPotence]")
+    div.derangements
+      div.derangement(data-action="derangement-filler")
+        label Derangement:
+        input(type="text", data-action="derangement-name", name="character[derangements]")
+        input(type="number", data-action="derangement-humanity", name="character[derangements]")
+  div#editCharacterSubmit
+    input(type="submit", value="Send")
