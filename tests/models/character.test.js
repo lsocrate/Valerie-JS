@@ -1,4 +1,4 @@
-var Character = require('../models/character').Character;
+var Character = require('../../models/character').Character;
 module.exports = {
   'test single covenant join': function(beforeExit, assert) {
     var character = new Character();

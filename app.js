@@ -1,3 +1,4 @@
+require('./components/extend-js');
 var express = require('express'),
     routes = require('./routes'),
     CharacterProvider = require('./character-provider-memory').CharacterProvider,
@@ -51,12 +52,13 @@ app.get('/character/new', function(req, res){
   }});
 });
 app.post('/character/new', function(req, res){
-  characterProvider.save({
-    name:req.param('name'),
-    clan:req.param('clan')
-  },function(error, docs){
-    res.redirect('/');
-  });
+  console.log(req.param('character'));
+  // characterProvider.save({
+  //   name:req.param('name'),
+  //   clan:req.param('clan')
+  // },function(error, docs){
+  //   res.redirect('/');
+  // });
 });
 
 app.listen(3000);
