@@ -40,3 +40,4 @@ public/.sass-cache
 # NODE_MODULES #
 ################
 node_modules
+config.js

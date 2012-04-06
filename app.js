@@ -4,7 +4,8 @@ var express = require('express'),
     CharacterProvider = require('./character-provider-memory').CharacterProvider,
     clans = require('./models/clan').clans,
     vices = require('./models/vice').vices,
-    virtues = require('./models/virtue').virtues;
+    virtues = require('./models/virtue').virtues,
+    config = require('./config').config;
 
 var app = module.exports = express.createServer();
 
@@ -16,7 +17,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: 'your secret here' }));
+  app.use(express.session({ secret: config.sessionSecret }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
