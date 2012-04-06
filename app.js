@@ -17,7 +17,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: config.sessionSecret }));
+  app.use(express.session({ secret: config.session.secret }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -34,7 +34,6 @@ characterProvider = new CharacterProvider();
 
 
 // Routes
-
 // app.get('/', routes.index);
 app.get('/', function(req, res){
   characterProvider.findAll(function(error,docs){
