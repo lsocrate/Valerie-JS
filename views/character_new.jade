@@ -5,7 +5,7 @@ form.character-new(method = "post")
       input(type="text", name="character[name]")
   div
     label Clan:
-      select(name="clan")
+      select(name="character[clan]")
         - each clan in clans
           option(value="#{clan}")= clan
   div
