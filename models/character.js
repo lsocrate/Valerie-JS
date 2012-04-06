@@ -1,4 +1,4 @@
-require('./components/extend-js');
+require('../components/extend-js');
 
 var util = require('util');
 
