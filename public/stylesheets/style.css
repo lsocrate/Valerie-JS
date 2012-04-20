@@ -252,15 +252,32 @@ td {
 .invisible {
   visibility: hidden; }
 
-.clearfix:before, .clearfix:after {
+.clearfix:before, .character-new .attributes:before, .character-new .skills:before, .clearfix:after, .character-new .attributes:after, .character-new .skills:after {
   content: "";
   display: table; }
 
-.clearfix:after {
+.clearfix:after, .character-new .attributes:after, .character-new .skills:after {
   clear: both; }
 
-.clearfix {
+.clearfix, .character-new .attributes, .character-new .skills {
   *zoom: 1; }
 
-.character-new {
-  background: #fc0; }
+.sheet-column, .character-new .attributes .attributes-mental, .character-new .attributes .attributes-physical, .character-new .attributes .attributes-social,
+.character-new .attributes .skills-mental, .character-new .attributes .skills-physical, .character-new .attributes .skills-social, .character-new .skills .attributes-mental, .character-new .skills .attributes-physical, .character-new .skills .attributes-social, .character-new .skills .skills-mental, .character-new .skills .skills-physical, .character-new .skills .skills-social {
+  width: 30%;
+  float: left;
+  margin-left: 20px; }
+
+.character-new .attributes, .character-new .skills {
+  margin: 40px 0; }
+  .character-new .attributes .attributes-mental:first-child, .character-new .attributes .attributes-physical:first-child, .character-new .attributes .attributes-social:first-child,
+  .character-new .attributes .skills-mental:first-child, .character-new .attributes .skills-physical:first-child, .character-new .attributes .skills-social:first-child, .character-new .skills .attributes-mental:first-child, .character-new .skills .attributes-physical:first-child, .character-new .skills .attributes-social:first-child, .character-new .skills .skills-mental:first-child, .character-new .skills .skills-physical:first-child, .character-new .skills .skills-social:first-child {
+    margin: 0; }
+  .character-new .attributes .attributes-mental label, .character-new .attributes .attributes-physical label, .character-new .attributes .attributes-social label,
+  .character-new .attributes .skills-mental label, .character-new .attributes .skills-physical label, .character-new .attributes .skills-social label, .character-new .skills .attributes-mental label, .character-new .skills .attributes-physical label, .character-new .skills .attributes-social label, .character-new .skills .skills-mental label, .character-new .skills .skills-physical label, .character-new .skills .skills-social label {
+    display: block;
+    position: relative; }
+    .character-new .attributes .attributes-mental label input, .character-new .attributes .attributes-physical label input, .character-new .attributes .attributes-social label input,
+    .character-new .attributes .skills-mental label input, .character-new .attributes .skills-physical label input, .character-new .attributes .skills-social label input, .character-new .skills .attributes-mental label input, .character-new .skills .attributes-physical label input, .character-new .skills .attributes-social label input, .character-new .skills .skills-mental label input, .character-new .skills .skills-physical label input, .character-new .skills .skills-social label input {
+      position: absolute;
+      right: 0; }

@@ -1,0 +1,30 @@
+.sheet-column {
+	width:30%;
+	float:left;
+	margin-left:20px;
+}
+
+.character-new {
+	.attributes, .skills {
+		@extend .clearfix;
+		margin:40px 0;
+		.attributes-mental, .attributes-physical, .attributes-social,
+		.skills-mental, .skills-physical, .skills-social {
+			@extend .sheet-column;
+
+			&:first-child {
+				margin:0;
+			}
+
+			label {
+				display:block;
+				position:relative;
+
+				input {
+					position:absolute;
+					right:0;
+				}
+			}
+		}
+	}
+}

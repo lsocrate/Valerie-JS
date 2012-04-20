@@ -2,6 +2,7 @@ require('./components/extend-js');
 var express = require('express'),
     routes = require('./routes'),
     CharacterProvider = require('./character-provider-memory').CharacterProvider,
+    Character = require('./models/character').Character,
     clans = require('./models/clan').clans,
     vices = require('./models/vice').vices,
     virtues = require('./models/virtue').virtues,
@@ -52,7 +53,12 @@ app.get('/character/new', function(req, res){
   }});
 });
 app.post('/character/new', function(req, res){
-  console.log(req.param('character'));
+  var data = req.param('character'),
+      character = new Character(data);
+
+  console.log('char', character);
+
+
   // characterProvider.save({
   //   name:req.param('name'),
   //   clan:req.param('clan')

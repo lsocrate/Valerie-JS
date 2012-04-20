@@ -1,8 +1,15 @@
 require('../components/extend-js');
 
-var util = require('util');
+var util = require('util'),
+    Connection = require('../components/connection').Connection;
 
 Character = function(){
+  var data = (typeof arguments[0] === 'object') ? arguments[0] : {} ,
+      name,
+      clan,
+      virtue,
+      vice;
+
   this.name         = '';
   this.clan         = '';
   this.bloodline    = '';
@@ -40,11 +47,6 @@ Character = function(){
   };
   this.assets       = [];
   this.maxDots      = 5;
-
-  var name,
-      clan,
-      virtue,
-      vice;
 
   if(typeof arguments[0] === "string") {
     name = arguments[0];
@@ -295,7 +297,7 @@ Character.prototype.updateHealth = function() {
   return this;
 };
 Character.prototype.wound = function(damage) {
-  var wound = damage.match(/^(\d*)(\w)/),
+  var wound = damage.match(/^(\d*)(\w)$/),
       quantity = parseInt(wound[1], 10),
       typeSign = wound[2],
       type = (typeSign.toStandard() === "b") ? 'bash':
@@ -308,6 +310,15 @@ Character.prototype.wound = function(damage) {
   }
 
   return this;
+};
+
+Character.prototype.save = function() {
+  var db = new Connection('characters');
+
+  db.insert(this, function (err, result){
+    console.log(result);
+    db.drop();
+  });
 };
 
 exports.Character = Character;
